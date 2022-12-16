@@ -25,3 +25,25 @@
     state: directory
     group: "{{ zigbee2mqtt_group }}"
     owner: "{{ zigbee2mqtt_user }}"
+
+- name: Copy configuration file
+  become: true
+  ansible.builtin.template:
+    src: zigbee2mqtt_configuration.yaml.j2
+    dest: "{{ zigbee2mqtt_home }}/configuration.yaml"
+    owner: "{{ zigbee2mqtt_user }}"
+    group: "{{ zigbee2mqtt_group }}"
+
+- name: Copy configuration secrets
+  become: true
+  ansible.builtin.template:
+    src: zigbee2mqtt_secrets.yaml.j2
+    dest: "{{ zigbee2mqtt_home }}/secrets.yaml"
+    owner: "{{ zigbee2mqtt_user }}"
+    group: "{{ zigbee2mqtt_group }}"
+    mode: 0640
+  when: >
+    mqtt_user is defined or
+    mqtt_password is defined or
+    zigbee2mqtt_frontend_auth_token is defined or
+    zigbee_network_key is defined
