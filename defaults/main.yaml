@@ -1,0 +1,5 @@
+---
+# User and group for zigbee2mqtt
+zigbee2mqtt_user: zigbee2mqtt
+zigbee2mqtt_group: zigbee2mqtt
+

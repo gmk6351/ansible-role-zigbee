@@ -1,0 +1,7 @@
+---
+- name: Add system group for zigbee2MQTT
+  become: true
+  ansible.builtin.group:
+    name: "{{ zigbee2mqtt_group }}"
+    state: present
+    system: true
