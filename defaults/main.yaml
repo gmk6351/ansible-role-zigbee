@@ -2,8 +2,44 @@
 # User and group for zigbee2mqtt
 zigbee2mqtt_user: zigbee2mqtt
 zigbee2mqtt_group: zigbee2mqtt
-
 zigbee2mqtt_shell: /usr/sbin/nologin
 
 # zigbee2MQTT data directory
 zigbee2mqtt_home: /var/opt/zigbee2mqtt
+
+# Don’t allow devices to join
+zigbee2mqtt_permit_join: false
+
+# Enable web frontend
+zigbee2mqtt_frontend: true
+# Web Frontend settings zigbee2mqtt_frontend_*
+#zigbee2mqtt_frontend_port: 8080
+#zigbee2mqtt_frontend_url: http://my.zigbee2mqtthost.example/
+#zigbee2mqtt_frontend_host: 0.0.0.0
+#zigbee2mqtt_frontend_auth_token: secret-token
+
+#zigbee2mqtt_log_level: error
+#zigbee2mqtt_log_directory: /var/log/zigbee2mqtt
+#zigbee2mqtt_log_output: [ console, syslog ]
+
+#zigbee2mqtt_output: 'json'
+zigbee2mqtt_homeassistant: false
+
+zigbee_adapter: /dev/ttyACM0
+# ZigBee PAN ID (16 bit identifier)
+#zigbee_panid: "0x1234"
+# ZigBee Extended PAN ID ( 64 bit extended identifier)
+#zigbee_extpanid: "[0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD, 0xDD]"
+# ZigBee channel
+#zigbee_channel
+# ZigBee Network key
+#zigbee_network_key
+
+# Zigbee2MQTT MQTT base topic
+mqtt_base_topic: zigbee2mqtt
+
+# MQTT server
+mqtt_server: mqtt://localhost:1883
+# MQTT authentication
+#mqtt_user: user
+#mqtt_password:
