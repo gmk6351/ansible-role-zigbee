@@ -1,0 +1,82 @@
+### {{ ansible_managed }}
+### 
+### ZigBee2MQTT configuration
+### ${ZIGBEE2MQTT_DATA}/configuration.yaml
+
+permit_join: {{ zigbee2mqtt_permit_join }}
+mqtt:
+  server: "{{ mqtt_server }}"
+{% if mqtt_user is defined %}
+  user: '!secrets.yaml mqtt_user'
+{% endif %}
+{% if mqtt_password is defined %}
+  password: '!secrets.yaml mqtt_password'
+{% endif %}
+  base_topic: {{ mqtt_base_topic }}
+serial:
+  port: "{{ zigbee_adapter }}"
+frontend: {% if not zigbee2mqtt_frontend %}
+false
+{% else %}
+{% if zigbee2mqtt_frontend_port is not defined
+ and zigbee2mqtt_frontend_url is not defined
+ and zigbee2mqtt_frontend_host is not defined
+ and zigbee2mqtt_frontend_auth_token is not defined
+%}
+true
+{% else %}
+
+{% if zigbee2mqtt_frontend_port is defined %}
+  port: {{ zigbee2mqtt_frontend_port }}
+{% endif %}{% if zigbee2mqtt_frontend_url is defined %}
+  url: {{ zigbee2mqtt_frontend_url }}
+{% endif %}{% if zigbee2mqtt_frontend_host is defined %}
+  host: {{ zigbee2mqtt_frontend_host }}
+{% endif %}{% if zigbee2mqtt_frontend_auth_token is defined %}
+  auth_token: '!secrets.yaml auth_token'
+{% endif %}
+{% endif %}
+{% endif %}
+
+devices: devices.yaml
+groups: groups.yaml
+
+{% if zigbee_panid is defined
+   or zigbee_extpanid is defined
+   or zigbee_channel is defined
+   or zigbee_network_key is defined
+   or zigbee2mqtt_log_level is defined
+   or zigbee2mqtt_log_directory is defined
+   or zigbee2mqtt_log_output is defined
+   or zigbee2mqtt_output is defined
+%}
+advanced:
+{% if zigbee_panid is defined %}
+  pan_id: {{ zigbee_panid }}
+{% endif %}
+{% if zigbee_extpanid is defined %}
+  ext_pan_id: {{ zigbee_extpanid }}
+{% endif %}
+{% if zigbee_channel is defined %}
+  channel: {{ zigbee_channel }}
+{% endif %}
+{% if zigbee_network_key is defined %}
+  network_key: '!secrets.yaml network_key'
+{% endif %}
+{% if zigbee2mqtt_log_level is defined %}
+  log_level: {{ zigbee2mqtt_log_level }}
+{% endif %}
+{% if zigbee2mqtt_log_directory is defined %}
+  log_directory: {{ zigbee2mqtt_log_directory }}
+{% endif %}
+{% if zigbee2mqtt_log_output is defined %}
+  log_output:
+{% for log_output in zigbee2mqtt_log_output %}
+  - {{ log_output }}
+{% endfor %}
+{% endif %}
+{% if zigbee2mqtt_output is defined %}
+  output: '{{ zigbee2mqtt_output }}'
+{% endif %}
+{% endif %}
+homeassistant: {{ zigbee2mqtt_homeassistant }}
