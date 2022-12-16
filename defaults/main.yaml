@@ -3,3 +3,7 @@
 zigbee2mqtt_user: zigbee2mqtt
 zigbee2mqtt_group: zigbee2mqtt
 
+zigbee2mqtt_shell: /usr/sbin/nologin
+
+# zigbee2MQTT data directory
+zigbee2mqtt_home: /var/opt/zigbee2mqtt

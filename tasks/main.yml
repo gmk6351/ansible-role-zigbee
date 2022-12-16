@@ -5,3 +5,15 @@
     name: "{{ zigbee2mqtt_group }}"
     state: present
     system: true
+
+- name: Add system user for zigbee2MQTT
+  become: true
+  ansible.builtin.user:
+    name: "{{ zigbee2mqtt_user }}"
+    state: present
+    system: true
+    create_home: true
+    skeleton: false
+    home: "{{ zigbee2mqtt_home }}"
+    shell: "{{ zigbee2mqtt_shell }}"
+    group: "{{ zigbee2mqtt_group }}"
