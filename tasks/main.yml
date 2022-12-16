@@ -17,3 +17,11 @@
     home: "{{ zigbee2mqtt_home }}"
     shell: "{{ zigbee2mqtt_shell }}"
     group: "{{ zigbee2mqtt_group }}"
+
+- name: Ensure zigbee2MQTT state directory exists
+  become: true
+  ansible.builtin.file:
+    path: "{{ zigbee2mqtt_home }}"
+    state: directory
+    group: "{{ zigbee2mqtt_group }}"
+    owner: "{{ zigbee2mqtt_user }}"
