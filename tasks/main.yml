@@ -17,6 +17,8 @@
     home: "{{ zigbee2mqtt_home }}"
     shell: "{{ zigbee2mqtt_shell }}"
     group: "{{ zigbee2mqtt_group }}"
+    groups:
+      - dialout
 
 - name: Ensure zigbee2MQTT state directory exists
   become: true
