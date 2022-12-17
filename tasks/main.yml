@@ -23,7 +23,7 @@
 - name: Ensure zigbee2MQTT state directory exists
   become: true
   ansible.builtin.file:
-    path: "{{ zigbee2mqtt_home }}"
+    path: "{{ zigbee2mqtt_home }}/data"
     state: directory
     group: "{{ zigbee2mqtt_group }}"
     owner: "{{ zigbee2mqtt_user }}"
@@ -32,7 +32,7 @@
   become: true
   ansible.builtin.template:
     src: zigbee2mqtt_configuration.yaml.j2
-    dest: "{{ zigbee2mqtt_home }}/configuration.yaml"
+    dest: "{{ zigbee2mqtt_home }}/data/configuration.yaml"
     owner: "{{ zigbee2mqtt_user }}"
     group: "{{ zigbee2mqtt_group }}"
 
@@ -40,7 +40,7 @@
   become: true
   ansible.builtin.template:
     src: zigbee2mqtt_secrets.yaml.j2
-    dest: "{{ zigbee2mqtt_home }}/secrets.yaml"
+    dest: "{{ zigbee2mqtt_home }}/data/secrets.yaml"
     owner: "{{ zigbee2mqtt_user }}"
     group: "{{ zigbee2mqtt_group }}"
     mode: 0640
