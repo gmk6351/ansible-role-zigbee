@@ -60,3 +60,22 @@
     clone: true
     update: false
   register: z_repo_cloned
+
+- name: Check installed node.js packages
+  become: true
+  become_user: "{{ zigbee2mqtt_user }}"
+  ansible.builtin.command:
+    chdir: "{{ zigbee2mqtt_path }}"
+    cmd: npm list --json
+  register: z_check_npm_list
+  no_log: true
+  failed_when: not z_check_npm_list.changed
+
+- name: Install Zigbee2MQTT
+  become: true
+  become_user: "{{ zigbee2mqtt_user }}"
+  community.general.npm:
+    ci: true
+    path: "{{ zigbee2mqtt_path }}"
+  when: z_repo_cloned.changed or
+    z_check_npm_list.rc == 1
