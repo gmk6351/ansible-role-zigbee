@@ -49,3 +49,14 @@
     mqtt_password is defined or
     zigbee2mqtt_frontend_auth_token is defined or
     zigbee_network_key is defined
+
+- name: Clone Zigbee2MQTT repository
+  become: true
+  become_user: "{{ zigbee2mqtt_user }}"
+  ansible.builtin.git:
+    dest: "{{ zigbee2mqtt_path }}"
+    repo: "{{ zigbee2mqtt_repository }}"
+    depth: 1
+    clone: true
+    update: false
+  register: z_repo_cloned

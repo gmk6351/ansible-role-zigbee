@@ -6,6 +6,10 @@ zigbee2mqtt_shell: /usr/sbin/nologin
 
 # zigbee2MQTT data directory
 zigbee2mqtt_home: /var/opt/zigbee2mqtt
+# Local install directory
+zigbee2mqtt_path: /opt/zigbee2mqtt
+# Upstream repository url
+zigbee2mqtt_repository: https://github.com/Koenkk/zigbee2mqtt.git
 
 # Don’t allow devices to join
 zigbee2mqtt_permit_join: false
