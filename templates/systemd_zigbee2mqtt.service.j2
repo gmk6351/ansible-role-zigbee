@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+[Unit]
+Description=Zigbee to MQTT bridge
+After=network.target
+Wants=mosquitto.service
+
+[Service]
+Environment=ZIGBEE2MQTT_DATA={{ zigbee2mqtt_home }}/data
+ExecStart=/usr/bin/npm start
+WorkingDirectory={{ zigbee2mqtt_path }}
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+RestartSec=10s
+User={{ zigbee2mqtt_user }}
+Group={{ zigbee2mqtt_group }}
+
+[Install]
+WantedBy=multi-user.target
